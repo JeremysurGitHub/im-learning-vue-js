@@ -1,5 +1,15 @@
 # Instance de Vue
 
+## Sommaire
+
+* Créer une instance de Vue : déclaration et objet d’options.
+
+* Données et méthodes : propriétés de l'objet data, système réactif, rendu de la vue, Object.freeze(), méthodes et propriétés avec le $.
+
+* Hooks de cycle de vie d’une instance : série d’étapes, pas de fonctions fléchées.
+
+* Diagramme du cycle de vie : voir la doc.
+
 ## Créer une instance de Vue
 
 Chaque application Vue est initialisée en créant une nouvelle instance de Vue avec la fonction Vue.
@@ -28,7 +38,7 @@ Si vous savez que vous allez avoir besoin d’une propriété plus tard qui n’
 
 La seule exception à cela est l’utilisation de Object.freeze(), qui empêche les propriétés existantes d’être changées, ce qui implique que le système de réactivité ne peut pas traquer les changements.
 
-En plus des propriétés de données, les instances de Vue exposent de nombreuses méthodes et propriétés utiles. Ces propriétés et méthodes sont préfixées par $ pour les différencier des propriétés proxifiées de data
+En plus des propriétés de données, les instances de Vue exposent de nombreuses méthodes et propriétés utiles. Ces propriétés et méthodes sont préfixées par $ pour les différencier des propriétés proxifiées de data.
 
 ```javascript
 // $watch est une méthode de l'instance
