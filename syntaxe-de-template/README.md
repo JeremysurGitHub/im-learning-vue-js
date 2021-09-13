@@ -66,10 +66,143 @@ Si isButtonDisabled a la valeur null, undefined, ou false, l’attribut disabled
 
 ### Utilisation des expressions JavaScript
 
+Jusqu’ici, nous avons seulement lié de simples clés de propriétés dans nos templates. Mais Vue.js supporte en réalité toute la puissance des expressions JavaScript à l’intérieur de toutes les liaisons de données :
 
+```javascript
+{{ number + 1 }}
+
+{{ ok ? 'OUI' : 'NON' }}
+
+{{ message.split('').reverse().join('') }}
+
+<div v-bind:id="'list-' + id"></div>
+```
+
+Ces expressions seront évaluées en tant que JavaScript au sein de la portée des données de l’instance de Vue propriétaire. Il y a une restriction : chacune de ces liaisons ne peut contenir qu’une seule expression, donc ce qui suit NE fonctionnera PAS :
+
+```javascript
+<!-- ceci est une déclaration, pas une expression: -->
+{{ var a = 1 }}
+
+<!-- le contrôle de flux ne marchera pas non plus, utilisez des expressions ternaires -->
+{{ if (ok) { return message } }}
+```
+
+> Les expressions de template sont isolées et ont seulement accès à une liste blanche de globales telles que Math et Date. Vous ne devriez pas tenter d’accéder à des variables globales définies par l’utilisateur dans les expressions de template.
 
 ## Directives
 
+Les directives sont des attributs spéciaux avec le préfixe v-. Les valeurs attendues pour les attributs de directives sont une unique expression JavaScript (à l’exception de v-for, qui sera expliquée plus loin). Le travail d’une directive est d’appliquer réactivement des effets secondaires au DOM quand la valeur de son expression change. Revenons à l’exemple vu dans l’introduction :
+
+```javascript
+<p v-if="seen">Maintenant vous me voyez</p>
+```
+
+Ici, la directive v-if retirerait / insèrerait l’élément <p> selon que l’expression seen soit considérée comme fausse / vraie.
+
+### Arguments
+
+Certaines directives peuvent prendre un “argument”, indiqué par un deux-points après le nom de la directive. Par exemple, la directive v-bind est utilisée pour mettre à jour réactivement un attribut HTML :
+
+```javascript
+<a v-bind:href="url"> ... </a>
+```
+
+Ici href est un argument, qui dit à la directive v-bind de lier l’attribut href de l’élément à la valeur de l’expression url.
+Un autre exemple est la directive v-on, qui écoute les évènements du DOM :
+
+```javascript
+<a v-on:click="doSomething"> ... </a>
+```
+
+Ici l’argument est le nom de l’évènement à écouter. Nous parlerons aussi plus en détail de la gestion des évènements.
+
+### Arguments dynamiques
+
+> Nouveau dans la 2.6.0+
+
+Introduit dans la version 2.6.0, il est aussi possible d’utiliser des expressions JavaScript dans un argument de directive inclus entre crochets : 
+
+```javascript
+<!--
+Notez qu'il y a diverses contraintes aux expressions d'argument, comme expliqué
+dans la section « Contraintes des expressions d'argument dynamique » ci-après.
+-->
+<a v-bind:[attributeName]="url"> ... </a>
+```
+
+Ici attributeName va dynamiquement être évalué comme une expression JavaScript et cette valeur d’évaluation va être utilisée comme valeur finale pour l’argument. Par exemple, si votre instance de Vue a une propriété de donnée, attributeName, et que cette valeur est "href", alors la liaison sera équivalente à v-bind:href.
+De manière similaire, vous pouvez utiliser les arguments dynamiques pour lier un gestionnaire d’évènement à un nom d’évènement dynamique :
+
+```javascript
+<a v-on:[eventName]="doSomething"> ... </a>
+```
+
+De manière similaire, donc, quand la valeur eventName est "focus", par exemple, v-on:[eventName] sera équivalent à v-on:focus.
+
+#### Contrainte des valeurs d’argument dynamique
+
+Les arguments dynamiques sont destinés à être évalués comme des chaines de caractères à l’exception de null. La valeur spéciale null peut être utilisée pour explicitement retirer la liaison. N’importe quelle autre valeur n’étant pas une chaine de caractères lèvera un avertissement.
+
+#### Contraintes des expressions d’argument dynamique
+
+Les expressions d’argument dynamique ont quelques contraintes de syntaxe car certains caractères sont invalides à l’intérieur d’un nom d’attribut HTML comme les espaces et les guillemets. Par exemple, ce qui suit est invalide :
+
+```javascript
+<!-- Ceci va lever un avertissement de compilation. -->
+<a v-bind:['foo' + bar]="value"> ... </a>
+```
+
+La solution consiste à utiliser des expressions sans espaces ni guillemets, ou à remplacer l’expression complexe par une propriété calculée.
+De plus, si vous utilisez des templates dans le DOM (templates directement écrits dans un fichier HTML), vous devez éviter les majuscules dans vos clés car les navigateurs convertissent les noms d’attribut en lettre minuscule :
+
+```javascript
+<!-- 
+Ceci va être converti en v-bind:[someattr] dans un template dans le DOM. -->
+À moins que vous ne fassiez référence à la propriété `"someattr"` dans votre instance, votre code ne fonctionnera pas.
+-->
+<a v-bind:[someAttr]="value"> ... </a>
+```
+
+### Modificateurs
+
+Les modificateurs sont des suffixes spéciaux indiqués par un point, qui indique qu’une directive devrait être liée d’une manière spécifique. Par exemple, le modificateur .prevent dit à la directive v-on d’appeler event.preventDefault() lorsque l’évènement survient.
+
+```javascript
+<form v-on:submit.prevent="onSubmit"> ... </form>
+```
+
+Nous verrons plus de cas d’utilisation des modificateurs plus loin quand nous porterons un regard plus attentif sur v-on et v-model.
+
 ## Abréviations
 
-### Interpolations
+Le préfixe v- sert d’indicateur visuel pour identifier les attributs spécifiques à Vue dans vos templates. C’est pratique lorsque vous utilisez Vue.js pour appliquer des comportements dynamiques sur un balisage existant, mais peut sembler verbeux pour des directives utilisées fréquemment. Par ailleurs, le besoin d’un préfixe v-devient moins important quand vous développez une application monopage où Vue.js gère tous les templates. C’est pourquoi Vue.js fournit des abréviations pour deux des directives les plus utilisées, v-bind et v-on :
+
+### Abréviation pour v-bind
+
+```javascript
+<!-- syntaxe complète -->
+<a v-bind:href="url"> ... </a>
+
+<!-- abréviation -->
+<a :href="url"> ... </a>
+
+<!-- abréviation avec argument dynamique (2.6.0+) -->
+<a :[key]="url"> ... </a>
+```
+
+### Abréviation pour v-on
+
+```javascript
+<!-- syntaxe complète -->
+<a v-on:click="doSomething"> ... </a>
+
+<!-- abréviation -->
+<a @click="doSomething"> ... </a>
+
+<!-- abréviation avec argument dynamique (2.6.0+) -->
+<a @[event]="doSomething"> ... </a>
+```
+
+Cela peut paraitre un peu différent du HTML classique, mais : et @ sont des caractères valides pour des noms d’attributs et tous les navigateurs supportés par Vue.js peuvent l’interpréter correctement. De plus, ils n’apparaissent pas dans le balisage final. La syntaxe abrégée est totalement optionnelle, mais vous allez probablement l’apprécier quand vous en apprendrez plus sur son utilisation plus loin.
+
