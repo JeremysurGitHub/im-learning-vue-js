@@ -2,13 +2,34 @@
 
 ## Sommaire
 
-* Description :
+* Description : Vue.js utilise une syntaxe de template basée sur le HTML qui vous permet de lier déclarativement le DOM rendu aux données de l’instance sous-jacente de Vue.
 
-* Interpolations : 
+* Interpolations :
+    * La forme la plus élémentaire de la liaison de données est l’interpolation de texte en utilisant la syntaxe “Mustache” (les doubles accolades)
 
-* Directives : 
+    * Vous pouvez également réaliser des interpolations à usage unique qui ne se mettront pas à jour lors de la modification des données en utilisant la directive v-once.
 
-* Abréviations : 
+    * Les doubles moustaches interprètent la donnée en tant que texte brut, pas en tant que HTML.
+
+    * > Générer dynamiquement du HTML arbitraire sur votre site peut être très dangereux car cela peut mener facilement à des vulnérabilités XSS.
+
+    * Les moustaches ne peuvent pas être utilisées à l’intérieur des attributs HTML. À la place utilisez une directive v-bind.
+
+    * Vue.js supporte en réalité toute la puissance des expressions JavaScript à l’intérieur de toutes les liaisons de données. Il y a une restriction : chacune de ces liaisons ne peut contenir qu’une seule expression.
+
+    * > Les expressions de template sont isolées et ont seulement accès à une liste blanche de globales telles que Math et Date. Vous ne devriez pas tenter d’accéder à des variables globales définies par l’utilisateur dans les expressions de template.
+
+* Directives : Les directives sont des attributs spéciaux avec le préfixe v-. Les valeurs attendues pour les attributs de directives sont une unique expression JavaScript (à l’exception de v-for, qui sera expliquée plus loin). Le travail d’une directive est d’appliquer réactivement des effets secondaires au DOM quand la valeur de son expression change. 
+
+    * Certaines directives peuvent prendre un “argument”, indiqué par un deux-points après le nom de la directive. 
+
+    * Arguments dynamiques : il est aussi possible d’utiliser des expressions JavaScript dans un argument de directive inclus entre crochets.
+
+    * Contrainte d’argument dynamique
+
+* Modificateurs : Les modificateurs sont des suffixes spéciaux indiqués par un point, qui indique qu’une directive devrait être liée d’une manière spécifique.
+
+* Abréviations : Vue.js fournit des abréviations pour deux des directives les plus utilisées, v-bind et v-on.
 
 ## Description
 
