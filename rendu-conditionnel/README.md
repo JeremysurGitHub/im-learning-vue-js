@@ -3,8 +3,9 @@
 ## Sommaire
 
 * v-if
-    * La directive v-if est utilisée pour conditionnellement faire le rendu d’un bloc.
 
+    * La directive v-if est utilisée pour conditionnellement faire le rendu d’un bloc.
+    
     * Le v-else-if, comme le nom le suggère, sert comme une « structure sinon si » pour v-if. Il peut également être enchainé plusieurs fois.
 
     * Il est également possible d’ajouter une structure « sinon » avec v-else.
