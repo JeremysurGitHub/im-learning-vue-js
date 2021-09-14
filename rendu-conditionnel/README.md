@@ -20,7 +20,7 @@
 
     * Nous pouvons utiliser v-if sur un élément <template>, qui sert d’enveloppe invisible. C'est pour plusieurs éléments.
 
-    * Contrôle des éléments réutilisables avec key
+    * Contrôle des éléments réutilisables avec key.
 
 ## v-if
 
