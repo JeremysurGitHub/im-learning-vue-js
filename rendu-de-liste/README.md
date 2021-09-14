@@ -61,3 +61,45 @@ Vous pouvez également utiliser of en tant que mot-clé à la place de in pour �
 
 ## v-for avec l’objet
 
+Vous pouvez aussi utiliser v-for pour itérer sur les propriétés d’un objet.
+
+```javascript
+<ul id="v-for-object" class="demo">
+  <li v-for="value in object">
+    {{ value }}
+  </li>
+</ul>
+
+new Vue({
+  el: '#v-for-object',
+  data: {
+    object: {
+      title: 'How to do lists in Vue',
+      author: 'Jane Doe',
+      publishedAt: '2016-04-10'
+    }
+  }
+})
+```
+
+Vous pouvez également fournir un deuxième argument représentant le nom de la propriété courante (c.-à-d. la clé) :
+
+```javascript
+<div v-for="(value, name) in object">
+  {{ name }}: {{ value }}
+</div>
+```
+
+Et un autre pour l’index :
+
+```javascript
+<div v-for="(value, name, index) in object">
+  {{ index }}. {{ name }}: {{ value }}
+</div>
+```
+
+Résultat : https://fr.vuejs.org/v2/guide/list.html
+
+> Quand vous itérez sur un objet, l’ordre est basé sur l’ordre d’énumération de Object.keys() et il n’y a aucune garantie de cohérence à travers toutes les implémentations des moteurs JavaScript.
+
+## Maintaining State
