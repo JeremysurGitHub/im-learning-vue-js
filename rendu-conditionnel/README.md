@@ -2,25 +2,23 @@
 
 ## Sommaire
 
+* v-if : La directive v-if est utilisée pour conditionnellement faire le rendu d’un bloc. 
+
+* Le v-else-if, comme le nom le suggère, sert comme une « structure sinon si » pour v-if. Il peut également être enchainé plusieurs fois. 
+
+* Il est également possible d’ajouter une structure « sinon » avec v-else.
+
+* Comme v-if est une directive, elle doit être attachée à un seul élément.
+
+* Nous pouvons utiliser v-if sur un élément <template>, qui sert d’enveloppe invisible. C'est pour plusieurs éléments.
+
+* Contrôle des éléments réutilisables avec key.
+
 * v-show : La différence est qu’un élément avec v-show sera toujours restitué et restera dans le DOM ; v-show permute simplement la propriété CSS display de l’élément.
 
 * v-if vs v-show : D’une manière générale, v-if a des couts à la permutation plus élevés alors que v-show a des couts au rendu initial plus élevés. Donc préférez v-show si vous avez besoin de permuter quelque chose très souvent et préférez v-if si la condition ne change probablement pas à l’exécution.
 
 * v-if avec v-for : Utiliser v-if et v-for ensemble n’est pas recommandé. Lorsqu’il est conjointement utilisé avec v-if, v-for a une priorité plus élevée que v-if.
-
-* v-if
-
-    * La directive v-if est utilisée pour conditionnellement faire le rendu d’un bloc.
-    
-    * Le v-else-if, comme le nom le suggère, sert comme une « structure sinon si » pour v-if. Il peut également être enchainé plusieurs fois.
-
-    * Il est également possible d’ajouter une structure « sinon » avec v-else.
-
-    * Comme v-if est une directive, elle doit être attachée à un seul élément.
-
-    * Nous pouvons utiliser v-if sur un élément <template>, qui sert d’enveloppe invisible. C'est pour plusieurs éléments.
-
-    * Contrôle des éléments réutilisables avec key.
 
 ## v-if
 
@@ -114,7 +112,7 @@ Une autre option pour afficher conditionnellement un élément est la directive 
 
 La différence est qu’un élément avec v-show sera toujours restitué et restera dans le DOM ; v-show permute simplement la propriété CSS display de l’élément.
 
-> Notez que v-show ne prend pas en charge la syntaxe de l’élément <template> et ne fonctionne pas avec v-else.
+Notez que v-show ne prend pas en charge la syntaxe de l’élément <template> et ne fonctionne pas avec v-else.
 
 ## v-if vs v-show
 
