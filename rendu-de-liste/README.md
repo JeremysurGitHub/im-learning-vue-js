@@ -2,6 +2,26 @@
 
 ## Sommaire
 
+* Associer un tableau à des éléments avec v-for : Nous pouvons utiliser la directive v-for pour faire le rendu d’une liste d’éléments en nous basant sur un tableau. La directive v-for utilise une syntaxe spécifique de la forme item in items, où items représente le tableau source des données et où item est un alias représentant l’élément du tableau en cours d’itération.
+
+* À l’intérieur des structures v-for, nous avons un accès complet aux propriétés de la portée parente. v-for supporte également un second argument optionnel représentant l’index de l’élément courant.
+
+* Vous pouvez aussi utiliser v-for pour itérer sur les propriétés d’un objet.
+
+* Maintaining State : Quand Vue met à jour une liste d’éléments rendus avec v-for, il utilise par défaut une stratégie de « modification localisée » (in-place patch). Contrainte, key.
+
+* Détection de changement dans un tableau : Méthodes de mutation, Remplacer un tableau, Limitations.
+
+* Affichage de résultats filtrés/triés : Parfois nous voulons afficher une version filtrée ou triée d’un tableau sans pour autant modifier ou réassigner les données d’origine.
+
+* v-for et plage de valeurs : v-for peut également prendre un nombre entier. Dans ce cas, il répètera le template autant de fois qu’indiqué.
+
+* Template v-for : De la même manière qu’avec v-if, vous pouvez également utiliser la balise < template > avec v-for pour faire le rendu d’une structure contenant de multiples éléments.
+
+* v-for avec v-if : Notez qu’il n’est pas recommandé d’utiliser v-if et v-for ensemble. Quand ils existent sur le même nœud, v-for a une priorité plus élevée que v-if. Cela signifie que v-if va être exécuté indépendamment à chaque itération de boucle. 
+
+* Composants et v-for : Cette partie suppose que vous connaissez les Composants. Vous pouvez la passer pour le moment et y revenir plus tard.
+
 ## Associer un tableau à des éléments avec v-for
 
 Nous pouvons utiliser la directive v-for pour faire le rendu d’une liste d’éléments en nous basant sur un tableau. La directive v-for utilise une syntaxe spécifique de la forme item in items, où items représente le tableau source des données et où item est un <strong>alias</strong> représentant l’élément du tableau en cours d’itération :
