@@ -193,3 +193,55 @@ methods: {
 ```
 
 ## v-for et plage de valeurs
+
+v-for peut également prendre un nombre entier. Dans ce cas, il répètera le template autant de fois qu’indiqué.
+
+```javascript
+<div>
+  <span v-for="n in 10">{{ n }} </span>
+</div>
+```
+
+Résultat : 1 2 3 4 ...
+
+## Template v-for
+
+De la même manière qu’avec v-if, vous pouvez également utiliser la balise < template > avec v-for pour faire le rendu d’une structure contenant de multiples éléments. Par exemple :
+
+```javascript
+<ul>
+  <template v-for="item in items">
+    <li>{{ item.msg }}</li>
+    <li class="divider" role="presentation"></li>
+  </template>
+</ul>
+```
+
+## v-for avec v-if
+
+> Notez qu’il n’est pas recommandé d’utiliser v-if et v-for ensemble. Référez-vous aux Conventions pour plus de détails.
+
+Quand ils existent sur le même nœud, v-for a une priorité plus élevée que v-if. Cela signifie que v-if va être exécuté indépendamment à chaque itération de boucle. C’est très utile quand vous voulez faire le rendu de seulement certains noeuds, comme ci-dessous :
+
+```javascript
+<li v-for="todo in todos" v-if="!todo.isComplete">
+  {{ todo }}
+</li>
+```
+
+La partie ci-dessus fait uniquement le rendu des tâches qui ne sont pas achevées.
+
+Si votre intention est plutôt de sauter conditionnellement l’exécution de la boucle, vous pouvez placer le v-if sur l’élément parent (ou sur < template >). Par exemple :
+
+```javascript
+<ul v-if="todos.length">
+  <li v-for="todo in todos">
+    {{ todo }}
+  </li>
+</ul>
+<p v-else>Plus de tâche !</p>
+```
+
+## Composants et v-for
+
+> Cette partie suppose que vous connaissez les Composants. Vous pouvez la passer pour le moment et y revenir plus tard.
