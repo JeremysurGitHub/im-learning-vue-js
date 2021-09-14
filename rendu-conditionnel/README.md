@@ -31,9 +31,9 @@ Il est également possible d’ajouter une structure « sinon » avec v-else :
 <h1 v-else>Oh non !</h1>
 ```
 
-### Groupes conditionnels avec v-if dans un <template>
+### Groupes conditionnels avec v-if dans une balise template.
 
-Comme v-if est une directive, elle doit être attachée à un seul élément. Mais comment faire si nous voulons permuter plusieurs éléments ? Dans ce cas, nous pouvons utiliser v-if sur un élément <template>, qui sert d’enveloppe invisible. Le résultat final rendu n’inclura pas l’élément <template>.
+Comme v-if est une directive, elle doit être attachée à un seul élément. Mais comment faire si nous voulons permuter plusieurs éléments ? Dans ce cas, nous pouvons utiliser v-if sur un élément < template >, qui sert d’enveloppe invisible. Le résultat final rendu n’inclura pas l’élément < template >.
 
 ```javascript
 <template v-if="ok">
