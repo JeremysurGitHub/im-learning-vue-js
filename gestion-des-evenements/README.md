@@ -155,3 +155,86 @@ Le modificateur .passive est particulièrement pratique pour améliorer les perf
 > N’utilisez pas .passive et .prevent ensemble. .passive sera ignoré et votre navigateur va probablement vous montrer un message. Souvenez-vous, .passive communique au navigateur que vous ne voulez pas prévenir le comportement de l’évènement par défaut.
 
 ## Modificateurs de code des touches
+
+Lorsque nous écoutons les évènements du clavier, nous avons régulièrement besoin de nous assurer du code des touches. Vue permet également d’ajouter un modificateur de touches pour v-on:
+
+```javascript
+<!-- faire appel à `vm.submit()` uniquement quand le code de la touche est `Enter` -->
+<input v-on:keyup.enter="submit">
+```
+
+Vous pouvez également utiliser n’importe quel nom de touche clavier valide fourni par KeyboardEvent.key en tant que modificateur en les écrivant au format kebab-case :
+
+```javascript
+<input @keyup.page-down="onPageDown">
+```
+
+Dans l’exemple ci-dessus, le gestionnaire va uniquement être appelé si $event.key est égale à ‘PageDown’`.
+
+### Code des touches
+
+> L’utilisation des évènements keyCode est déprécié et pourrait ne plus être supportée dans de futurs navigateurs.
+
+> J'ignore cette partie.
+
+## Modificateurs de touches système
+
+> Nouveau dans la 2.1.0+
+
+Vous pouvez utiliser les modificateurs suivants pour déclencher un évènement du clavier ou de la souris seulement lorsque la touche du modificateur correspondante est pressée :
+
+* .ctrl
+* .alt
+* .shift
+* .meta
+
+> Note: Sur les claviers Macintosh, meta est la touche commande (⌘). Sur Windows, meta est la touche windows (⊞). Sur les claviers Sun Microsystems, meta est symbolisée par un diamant plein (◆). Sur certains claviers, spécifiquement sur les claviers des machines MIT et Lisp et leurs successeurs, comme le clavier « Knight » et « space-cadet », meta est écrit « META ». Sur les claviers Symboliques, meta est étiqueté « META » ou « Meta ».
+
+Par exemple :
+
+```javascript
+<!-- Alt + C -->
+<input v-on:keyup.alt.67="clear">
+
+<!-- Ctrl + Click -->
+<div v-on:click.ctrl="doSomething">Do something</div>
+```
+
+> Notez que ces modificateurs de raccourcis sont différents des modificateurs usuels utilisés avec l’évènement keyup, ils doivent être pressés quand l’évènement est émis. En d’autres mots, keyup.ctrl sera déclenché uniquement si vous relâchez une touche pendant que vous maintenez la touche ctrl enfoncée. Rien ne sera déclenché si vous relâchez uniquement la touche Ctrl. Si vous souhaitez un tel comportement, utilisez le keyCode pour ctrl à la place : keyup.17.
+
+### Modificateur .exact
+
+> Nouveau dans la 2.5.0+
+
+Le modificateur .exact permet le contrôle de la combinaison de touches système exacte requise pour déclencher le gestionnaire d’évènements.
+
+```javscript
+<!-- ceci va aussi émettre un évènement si les touches Alt et Shift sont pressées -->
+<button v-on:click.ctrl="onClick">A</button>
+
+<!-- ceci va émettre un évènement seulement si la touche Ctrl est pressée sans aucune autre touche -->
+<button v-on:click.ctrl.exact="onCtrlClick">A</button>
+
+<!-- ceci va émettre un évènement si aucune touche n'est pressée -->
+<button v-on:click.exact="onClick">A</button>
+```
+
+### Modificateurs de boutons de la souris
+
+> Nouveau dans la 2.2.0+
+
+* .left
+* .right
+* .middle
+
+Ces modificateurs n’autorisent la gestion de l’évènement que s’il a été déclenché par un bouton spécifique de la souris.
+
+## Pourquoi des écouteurs dans le HTML ?
+
+Vous pourriez être inquiet du fait que l’ensemble de cette approche d’écoute d’évènements viole la bonne vieille règle de la séparation des préoccupations. Rassurez-vous - puisque toutes les fonctions et expressions sont strictement liées au « ViewModel » qui gère la vue courante, cela ne causera aucune difficulté de maintenance. En réalité, il y a plusieurs avantages à utiliser v-on :
+
+1. Il est plus facile de localiser l’implémentation des fonctions gestionnaires dans votre code JS en survolant le code HTML.
+
+1. Comme vous n’avez pas à attacher manuellement les écouteurs dans votre JS, le code du « ViewModel » peut être purement logique et sans DOM. Ceci le rend plus facile à tester.
+
+1. Quand un « ViewModel » est détruit, tous les écouteurs d’évènements sont automatiquement retirés. Vous n’avez pas à vous soucier de le faire vous-même.
