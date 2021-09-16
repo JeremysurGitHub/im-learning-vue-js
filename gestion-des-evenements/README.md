@@ -2,6 +2,24 @@
 
 ## Sommaire
 
+* Écouter des évènements : Nous pouvons utiliser l’instruction v-on pour écouter les évènements du DOM afin d’exécuter du JavaScript lorsque ces évènements surviennent.
+
+* Méthodes des gestionnaires d’évènements : La logique avec beaucoup de gestionnaires d’évènements sera très certainement plus complexe, par conséquent, v-on peut aussi accepter le nom d’une méthode que vous voudriez appeler.
+
+* Méthodes appelées dans les valeurs d’attributs : Au lieu de lier directement la méthode par son nom dans l’attribut, nous pouvons également utiliser des méthodes dans une instruction JavaScript. Parfois nous avons également besoin d’accéder à l’évènement original du DOM depuis l’instruction dans l’attribut. Vous pouvez le passer à une méthode en utilisant la variable spéciale $event.
+
+* Modificateurs d’évènements : Il serait préférable que les méthodes restent purement dédiées à la logique des données au lieu d’avoir à gérer les détails des évènements du DOM. Vue propose des modificateurs d’évènements pour v-on. Rappelez-vous que les modificateurs sont des suffixes de directives indiqués par un point, .stop par exemple. L’ordre a de l’importance quand vous utilisez des modificateurs car le code est généré dans le même ordre. Le modificateur .passive est particulièrement pratique pour améliorer les performances sur mobile. N’utilisez pas .passive et .prevent ensemble. .passive sera ignoré et votre navigateur va probablement vous montrer un message. 
+
+* Modificateurs de code des touches : Lorsque nous écoutons les évènements du clavier, nous avons régulièrement besoin de nous assurer du code des touches. Vue permet également d’ajouter un modificateur de touches pour v-on.
+
+* Modificateurs de touches système : Vous pouvez utiliser les modificateurs suivants pour déclencher un évènement du clavier ou de la souris seulement lorsque la touche du modificateur correspondante est pressée.
+
+* Le modificateur .exact permet le contrôle de la combinaison de touches système exacte requise pour déclencher le gestionnaire d’évènements.
+
+* Modificateurs de boutons de la souris : Ces modificateurs n’autorisent la gestion de l’évènement que s’il a été déclenché par un bouton spécifique de la souris.
+
+* Pourquoi des écouteurs dans le HTML ? : 3 avantages.
+
 ## Écouter des évènements
 
 Nous pouvons utiliser l’instruction v-on pour écouter les évènements du DOM afin d’exécuter du JavaScript lorsque ces évènements surviennent.
