@@ -6,3 +6,4 @@ I learn Vue.JS from the documentation.
 ## Incomplet
 * Liaisons de classes et de styles (Avec des composants)
 * Rendu de list (Composants et v-for)
+* Liaisons sur les champs de formulaire (v-model avec les composants)
