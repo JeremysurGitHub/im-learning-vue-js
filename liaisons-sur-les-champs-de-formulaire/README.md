@@ -97,6 +97,7 @@ new Vue({
   }
 })
 ```
+
 Si la valeur initiale de votre expression dans v-model ne correspond à aucune des options, l’élément <select> va faire le rendu dans un état « non sélectionné ». Sur iOS cela va conduire l’utilisateur à ne pas pouvoir sélectionner le premier élément car aucun évènement change n’est déclenché dans ce cas. Il est cependant recommandé de fournir une option désactivée avec une valeur vide comme dans l’exemple ci-dessus.
 
 Select à choix multiples (lié à un tableau) :
