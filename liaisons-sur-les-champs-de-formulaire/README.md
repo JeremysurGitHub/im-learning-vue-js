@@ -98,7 +98,7 @@ new Vue({
 })
 ```
 
-Si la valeur initiale de votre expression dans v-model ne correspond à aucune des options, l’élément <select> va faire le rendu dans un état « non sélectionné ». Sur iOS cela va conduire l’utilisateur à ne pas pouvoir sélectionner le premier élément car aucun évènement change n’est déclenché dans ce cas. Il est cependant recommandé de fournir une option désactivée avec une valeur vide comme dans l’exemple ci-dessus.
+Si la valeur initiale de votre expression dans v-model ne correspond à aucune des options, l’élément < select > va faire le rendu dans un état « non sélectionné ». Sur iOS cela va conduire l’utilisateur à ne pas pouvoir sélectionner le premier élément car aucun évènement change n’est déclenché dans ce cas. Il est cependant recommandé de fournir une option désactivée avec une valeur vide comme dans l’exemple ci-dessus.
 
 Select à choix multiples (lié à un tableau) :
 
@@ -226,4 +226,3 @@ Si vous voulez que les espaces superflus des saisies utilisateur soient automati
 ## v-model avec les composants
 
 > Si vous n’êtes pas encore familier avec les composants de Vue, passez cette section pour le moment.
-
